@@ -29,7 +29,8 @@ const createBooking = async (req, res) => {
         // Create booking
         const booking = await Booking.create({
             user: req.user.id,
-            event: eventId
+            event: eventId,
+            status: "pending"
         });
 
         res.status(201).json({
@@ -99,8 +100,64 @@ const cancelBooking = async (req, res) => {
     }
 };
 
+const getAllBookings = async (req, res) => {
+    try {
+        const bookings = await Booking.find()
+            .populate("user", "name email")
+            .populate("event", "title date location");
+
+        res.status(200).json({
+            count: bookings.length,
+            bookings
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to fetch bookings",
+            error: error.message
+        });
+    }
+};
+
+const updateBookingStatus = async (req, res) => {
+    try {
+        const { status } = req.body;
+
+        if (!["approved", "rejected"].includes(status)) {
+            return res.status(400).json({
+                message: "Status must be approved or rejected"
+            });
+        }
+
+        const booking = await Booking.findById(req.params.id);
+
+        if (!booking) {
+            return res.status(404).json({
+                message: "Booking not found"
+            });
+        }
+
+        booking.status = status;
+
+        await booking.save();
+
+        res.status(200).json({
+            message: `Booking ${status} successfully`,
+            booking
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to update booking status",
+            error: error.message
+        });
+    }
+};
+
 module.exports = {
     createBooking,
     getMyBookings,
-    cancelBooking
+    cancelBooking,
+    getAllBookings,
+    updateBookingStatus
 };

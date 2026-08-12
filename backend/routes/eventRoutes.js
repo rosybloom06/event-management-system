@@ -10,9 +10,11 @@ const {
     deleteEvent
 } = require("../controllers/eventController");
 
-router.post("/", createEvent);
+const protect = require("../middleware/authMiddleware");
+const admin = require("../middleware/adminMiddleware");
+
+router.post("/", protect, admin, createEvent);
 router.get("/", getEvents);
-router.get("/:id", getEventById);
-router.put("/:id", updateEvent);
-router.delete("/:id", deleteEvent);
+router.put("/:id", protect, admin, updateEvent);
+router.delete("/:id", protect, admin, deleteEvent);
 module.exports = router;

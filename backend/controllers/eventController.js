@@ -55,7 +55,7 @@ const getEvents = async (req, res) => {
             filter.category = category;
         }
 
-        const events = await Event.find(filter).sort({ date: 1 });
+        const events = await Event.find(filter).populate("category").sort({ date: 1 });
 
         res.status(200).json({
             count: events.length,
@@ -72,7 +72,7 @@ const getEvents = async (req, res) => {
 
 const getEventById = async (req, res) => {
     try {
-        const event = await Event.findById(req.params.id);
+        const event = await Event.findById(req.params.id).populate("category");
 
         if (!event) {
             return res.status(404).json({
@@ -101,7 +101,7 @@ const updateEvent = async (req, res) => {
                 new: true,
                 runValidators: true
             }
-        );
+).populate("category");
 
         if (!event) {
             return res.status(404).json({
