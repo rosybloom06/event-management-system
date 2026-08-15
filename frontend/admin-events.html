@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Events | Venuro</title><link rel="stylesheet" href="css/style.css">
+</head><body>
+<header class="site-header"><nav class="navbar"><a href="admin-dashboard.html" class="logo">Venuro<span>.</span></a><div class="nav-links"></div></nav></header>
+<main class="container">
+<div class="page-header"><div><span class="section-label">ADMINISTRATION</span><h1>Manage events</h1><p class="page-subtitle">Create and maintain the events visible to users.</p></div><button type="button" id="add-event-btn">+ Add event</button></div>
+<section id="event-form-section" class="form-section" hidden>
+<h2 id="form-title">Add event</h2>
+<form id="event-form"><input type="hidden" id="event-id">
+<div class="form-grid">
+<div class="field"><label for="title">Event title</label><input type="text" id="title" placeholder="Enter event title" required></div>
+<div class="field"><label for="date">Date</label><input type="date" id="date" required></div>
+<div class="field"><label for="time">Time</label><input type="time" id="time"></div>
+<div class="field"><label for="location">Location</label><input type="text" id="location" placeholder="Venue or location" required></div>
+<div class="field"><label for="category">Category</label><select id="category"><option value="">Select category</option></select></div>
+<div class="field"><label for="capacity">Capacity</label><input type="number" id="capacity" min="1" placeholder="e.g. 100" required></div>
+<div class="field">
+    <label for="price">Price (₹)</label>
+    <input type="number" id="price" min="0" step="0.01" placeholder="e.g. 499" required>
+</div>
+<div class="field field-full"><label for="image">Image URL <span style="font-weight:500;color:#687083">(optional)</span></label><input type="url" id="image" placeholder="https://..."></div>
+<div class="field field-full"><label for="description">Description</label><textarea id="description" placeholder="Describe the event" required></textarea></div>
+</div>
+<div class="form-buttons"><button type="submit">Save event</button><button type="button" id="cancel-event-btn">Cancel</button></div>
+</form></section>
+<section><div class="page-header"><div><h2>All events</h2><p class="page-subtitle">Existing events and their current details.</p></div></div><div id="events-container"><div class="loading-state">Loading events...</div></div></section>
+</main><footer>© 2026 Venuro · Administration</footer>
+<script src="js/app.js"></script><script src="js/nav.js"></script><script src="js/admin-events.js"></script>
+</body></html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Categories | Venuro</title><link rel="stylesheet" href="css/style.css">
+</head><body>
+<header class="site-header"><nav class="navbar"><a href="admin-dashboard.html" class="logo">Venuro<span>.</span></a><div class="nav-links"></div></nav></header>
+<main class="container">
+
+    <div class="category-page-header">
+        <span class="section-label">ADMINISTRATION</span>
+        <h1>Manage categories</h1>
+        <p class="page-subtitle">Create and organize the categories used by events.</p>
+    </div>
+<section class="category-form-section"><h2>Add category</h2><form id="categoryForm"><div class="form-grid"><div class="field"><label for="categoryName">Category name</label><input type="text" id="categoryName" placeholder="e.g. Technology" required></div><div class="field"><label for="categoryDescription">Description</label><input type="text" id="categoryDescription" placeholder="Short description"></div></div><button type="submit">Add category</button></form></section>
+<section class="existing-categories-section">
+    <h2>Existing categories</h2>
+    <div id="categories-container" class="categories-grid">
+        <div class="loading-state">Loading categories...</div>
+    </div>
+</section>
+</main><footer>© 2026 Venuro · Administration</footer>
+<script src="js/app.js"></script><script src="js/nav.js"></script><script src="js/admin-categories.js"></script>
+</body></html>
