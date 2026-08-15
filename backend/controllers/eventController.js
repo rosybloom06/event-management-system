@@ -9,6 +9,7 @@ const createEvent = async (req, res) => {
             location,
             category,
             capacity,
+            price,
             image
         } = req.body;
 
@@ -20,6 +21,7 @@ const createEvent = async (req, res) => {
             location,
             category,
             capacity,
+            price,
             image
         });
 
