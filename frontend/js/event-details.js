@@ -43,32 +43,59 @@ async function loadEvent() {
 
 async function bookEvent() {
     const token = Venuro.getToken();
+
     if (!token) {
         window.location.href = "login.html";
         return;
     }
+
     const button = document.getElementById("book-event-btn");
     const feedback = document.getElementById("booking-feedback");
+
+    // Prevent double-clicking while booking
     button.disabled = true;
     button.textContent = "Booking…";
+    button.style.cursor = "default";
+
     feedback.textContent = "";
+    feedback.className = "booking-feedback";
+
     try {
         const response = await fetch(`${API_URL}/bookings`, {
             method: "POST",
-            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
             body: JSON.stringify({ eventId })
         });
+
         const data = await response.json().catch(() => ({}));
-        if (!response.ok) throw new Error(data.message || "Failed to book event.");
-        feedback.textContent = "Booking submitted successfully. You can track it in My Bookings.";
+
+        if (!response.ok) {
+            throw new Error(data.message || "Failed to book event.");
+        }
+
+        // Booking succeeded
+        feedback.textContent =
+            "Booking submitted successfully. You can track it in My Bookings.";
         feedback.className = "booking-feedback message-success";
+
+        button.disabled = true;
         button.textContent = "Booking submitted";
+        button.style.cursor = "default";
+
     } catch (error) {
         console.error(error);
-        feedback.textContent = error.message || "Unable to connect to the server.";
+
+        feedback.textContent =
+            error.message || "Unable to connect to the server.";
         feedback.className = "booking-feedback message-error";
+
+        // Allow the user to try again
         button.disabled = false;
         button.textContent = "Book this event";
+        button.style.cursor = "pointer";
     }
 }
 

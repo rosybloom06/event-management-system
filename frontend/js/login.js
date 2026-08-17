@@ -26,7 +26,7 @@ loginForm?.addEventListener("submit", async (event) => {
         loginMessage.textContent = "Login successful. Redirecting…";
         loginMessage.className = "message-success";
 
-        window.location.href = data.user?.role === "admin" ? "admin-dashboard.html" : "events.html";
+        window.location.href = data.user?.role === "admin" ? "admin-dashboard.html" : "index.html";
     } catch (error) {
         console.error(error);
         loginMessage.textContent = error.message || "Unable to connect to server.";
