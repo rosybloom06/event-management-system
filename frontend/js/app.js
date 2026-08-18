@@ -1,5 +1,5 @@
 /* Venuro shared frontend helpers. Backend API contracts remain unchanged. */
-const API_URL = window.VENURO_API_URL || "http://localhost:5000/api";
+const API_URL = window.VENURO_API_URL || "https://venuro-backend.onrender.com/api";
 
 window.Venuro = {
     API_URL,
